@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "FloodFiller.h"
 
-#define M 2
-#define N 2
+#define M 5
+#define N 5
 
 
 FloodFiller::FloodFiller()
@@ -21,8 +21,11 @@ FloodFiller::~FloodFiller()
 
 void FloodFiller::InitScreen()
 {
-    int screenDefVal[M][N] = { {0, 1},
-                     {0, 1} };
+    int screenDefVal[M][N] = { {0, 1, 2, 1, 0},
+                               {0, 1, 2, 1, 0},
+                               {0, 1, 2, 1, 0}, 
+                               {0, 1, 2, 1, 0}, 
+                               {0, 1, 2, 1, 0}, };
 
     for (int i = 0; i < N; ++i)
     {
@@ -68,8 +71,10 @@ FColor FloodFiller::GetColorByNumber(int num)
     {
     case 0:
         return FColor::Red;
-    default:
+    case 1:
         return FColor::Blue;
+    default:
+        return FColor::Green;
     }        
 }
 
@@ -79,7 +84,11 @@ int FloodFiller::GetNumberByColor(FColor color)
     {
         return 0;
     }
-    return 1;
+    else if (color.B == 1)
+    {
+        return 1;
+    }
+    return 2;
 }
 
 FColor FloodFiller::GetColorByMatrixLocation(int row, int column)
